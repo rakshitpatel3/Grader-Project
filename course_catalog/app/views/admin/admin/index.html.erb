@@ -1,0 +1,41 @@
+<h1>Admin Dashboard</h1>
+
+<h2>Courses</h2>
+
+<%= form_tag(courses_path, method: :get) do %>
+  <div class="search-bar">
+    <%= label_tag :search, "Search by Course Number or Instructor" %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", name: nil %>
+  </div>
+<% end %>
+
+<div class="button-container">
+  <%= button_to 'Reload Course Catalog', admin_reload_catalog_path, method: :post, class: "button" %>
+  <%= link_to 'Approve Users', admin_approve_path, class: "button" %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Course Number</th>
+      <th>Course Name</th>
+      <th>Term</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.number %></td>
+        <td><%= course.name %></td>
+        <td><%= course.term %></td>
+        <td><%= course.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagy_nav(@pagy).html_safe %>
+
+<%= button_to 'Back', root_path, method: :get, class: "button" %>

@@ -1,0 +1,30 @@
+<h1>Approve Users</h1>
+
+<% if @pending_users.any? %>
+  <h2>Pending Users</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Created At</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pending_users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= user.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+          <td>
+            <%= button_to "Approve", admin_approve_user_path(user), method: :post, 
+                class: "button", data: { confirm: "Are you sure you want to approve this user?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No pending users to approve.</p>
+<% end %>
+
+<%= link_to "Back to Admin Dashboard", admin_index_path %>

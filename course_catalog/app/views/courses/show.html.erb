@@ -1,0 +1,32 @@
+<h1><%= @course.name %> (<%= @course.number %>)</h1>
+
+<h2>Section Details</h2>
+
+<% if @course.sections.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Instructor</th>
+        <th>Meeting Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @course.sections.each do |section| %>
+        <tr>
+          <td><%= section.instructor %></td>
+          <td><%= section.time %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No sections available for this course.</p>
+<% end %>
+
+<% if current_user&.admin? %>
+  <%= link_to 'Edit', edit_course_path(@course), class: "button" %>
+  <%= link_to 'Delete', course_path(@course), method: :delete, data: { confirm: 'Are you sure?' }, class: "button" %>
+  <%= link_to 'Back to Dashboard', admin_index_path, class: "button" %>
+<% end %>
+
+<%= link_to 'Back to Courses', courses_path, class: "button" %>

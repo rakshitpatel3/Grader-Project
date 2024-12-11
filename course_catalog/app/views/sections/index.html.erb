@@ -1,0 +1,26 @@
+<h1>Sections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Course Number</th>
+      <th>Course Name</th>
+      <th>Instructor</th>
+      <th>Meeting Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sections.each do |section| %>
+      <tr>
+        <td><%= section.course.number %></td>
+        <td><%= section.course.name %></td>
+        <td><%= section.instructor %></td>
+        <td><%= section.time %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagy_nav(@pagy).html_safe %>
+
+<%= button_to 'Back', root_path, method: :get, class: "button" %>

@@ -1,0 +1,17 @@
+<h1>Reload Course Catalog</h1>
+
+<%= form_with url: admin_reload_catalog_path, method: :post, local: true do %>
+ <div>
+    <%= form.label :term %>
+    <%= form.text_field :term, value: "1246", required: true %>
+  </div>
+  <div>
+    <%= form.label :campus %>
+    <%= form.text_field :campus, value: "col", required: true %>
+  </div>
+  <div>
+    <%= form.submit "Reload Catalog" %>
+  </div>
+<% end %>
+
+<p><%= link_to "Back to Admin Dashboard", admin_index_path %></p>

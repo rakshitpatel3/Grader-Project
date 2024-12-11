@@ -1,0 +1,42 @@
+<h1>Course Catalog</h1>
+
+<%= form_with url: courses_path, method: :get do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search by course number" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if current_user&.admin? %>
+  <div class="button-container">
+    <%= link_to 'Reload Course Catalog', admin_reload_catalog_path, method: :post, class: "button" %>
+    <%= link_to 'Approve Users', admin_approve_path, method: :post, class: "button" %>
+  </div>
+  <%= link_to 'New Course', new_course_path %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Course Number</th>
+      <th>Course Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.number %></td>
+        <td><%= course.name %></td>
+        <td>
+          <%= link_to 'Show', course_path(course), class: "button" %>
+          <% if current_user&.admin? %>
+            <%= link_to 'Edit', edit_course_path(course), class: "button" %>
+            <%= link_to 'Delete', course_path(course), method: :delete, data: { confirm: 'Are you sure?' }, class: "button" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagy_nav(@pagy).html_safe %>
+
+<%= button_to 'Back', root_path, method: :get, class: "button" %>

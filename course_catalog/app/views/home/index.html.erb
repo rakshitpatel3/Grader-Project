@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Welcome to the Course Catalog</h1>
+
+  <% if user_signed_in? %>
+    <p>Hello, <%= current_user.name %>!</p>
+    <p>Your role is: <%= current_user.role %></p>
+    <p>Your approval status is: <%= current_user.approved ? 'Approved' : 'Not Approved' %></p>
+
+    <nav class="navigation-bar">
+      <% if current_user.admin? %>
+        <%= link_to 'Admin Dashboard', admin_index_path, class: "button" %>
+      <% end %>
+      <%= link_to 'Edit Profile', edit_user_registration_path, class: "button" %>
+      <%= link_to 'View Courses', courses_path, class: "button" %>
+      <%= link_to 'View Sections', sections_path, class: "button" %>
+    </nav>
+
+    <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: "button" %>
+  <% else %>
+    <%= link_to 'Log in', new_user_session_path, class: "button" %>
+    <%= link_to 'Sign up', new_user_registration_path, class: "button" %>
+  <% end %>
+</div>

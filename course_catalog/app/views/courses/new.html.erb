@@ -1,0 +1,17 @@
+<h1><%= action_name.capitalize %> Course</h1>
+
+<%= form_with(model: @course) do |form| %>
+  <div>
+    <%= form.label :course_number %>
+    <%= form.text_field :course_number %>
+  </div>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
