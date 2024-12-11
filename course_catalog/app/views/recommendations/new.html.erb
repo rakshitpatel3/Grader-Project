@@ -1,0 +1,112 @@
+<h1>New Recommendation</h1>
+
+<%= form_with(model: @recommendation, local: true) do |form| %>
+  <% if @recommendation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@recommendation.errors.count, "error") %> prohibited this recommendation from being saved:</h2>
+      <ul>
+        <% @recommendation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :student_email, "Student Email" %>
+    <%= text_field_tag :student_email, nil, placeholder: 'studentname.#@osu.edu' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_id, "Course" %>
+    <%= form.collection_select :course_id, Course.all, :id, :number, prompt: "Select a course" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :recommendation_type, "Type of Recommendation" %>
+    <%= form.select :recommendation_type, 
+        options_for_select([
+          ['Future Consideration', 'future_consideration'],
+          ['Specific Section Request', 'specific_section']
+        ]), 
+        {}, 
+        { onchange: 'toggleSectionField(this.value)' } %>
+  </div>
+
+  <div class="field" id="section_field" style="display: none;">
+    <%= form.label :section_id, "Section" %>
+    <%= form.collection_select :section_id, Section.all, :id, 
+        ->(s) { "#{s.course.number} - #{s.instructor} (#{s.time})" }, 
+        prompt: "Select a section" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comments, "Comments" %>
+    <%= form.text_area :comments, placeholder: "Please provide your recommendation comments here..." %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Recommendation" %>
+  </div>
+<% end %>
+
+<div class="navigation-links">
+  <%= link_to "Back to Recommendations", recommendations_path, class: "button" %>
+  <%= link_to "Back to Dashboard", home_path, class: "button" %>
+</div>
+
+<script>
+function toggleSectionField(value) {
+  const sectionField = document.getElementById('section_field');
+  sectionField.style.display = value === 'specific_section' ? 'block' : 'none';
+}
+</script>
+
+<style>
+.field {
+  margin-bottom: 15px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.field input[type="text"],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.field textarea {
+  height: 100px;
+}
+
+.actions {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.navigation-links {
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-right: 10px;
+  text-decoration: none;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+}
+</style>

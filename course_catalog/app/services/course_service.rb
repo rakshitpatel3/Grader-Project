@@ -71,7 +71,8 @@ class CourseService
         )
         section.assign_attributes(
           instructor: instructor,
-          time: time
+          time: time,
+          graders_required: section.graders_required || 1
         )
         section.save!
       end

@@ -3,7 +3,8 @@ class CoursesController < ApplicationController
   
   before_action :authenticate_user!
   before_action :authenticate_admin!, only: [:new, :create, :fetch_classes, :edit, :update, :destroy]
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :confirm_destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # GET /courses or /courses.json
   def index
@@ -61,13 +62,16 @@ class CoursesController < ApplicationController
     end
   end
 
-  # DELETE /courses/1 or /courses/1.json
+  def confirm_destroy
+
+  end
+
   def destroy
-    @course.destroy
-    respond_to do |format|
-      format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
-      format.json { head :no_content }
-    end
+      if @course.destroy
+        redirect_to courses_path, notice: 'Course was successfully deleted.'
+      else
+        redirect_to courses_path, alert: 'Failed to delete the course.'
+      end
   end
 
   # POST /courses/fetch_classes
@@ -98,10 +102,13 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:term, :title, :description, :subject, :catalog_number, :campus, :course_id, :required_graders, :name, :number)
   end
   
-
   def authenticate_admin!
     unless current_user&.admin? 
       redirect_to root_path, alert: "Access denied."
     end
   end
+end
+
+def record_not_found
+  render plain: "Course does not exist", status: :not_found
 end

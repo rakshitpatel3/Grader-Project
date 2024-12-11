@@ -1,0 +1,13 @@
+<h1>Confirm Deletion</h1>
+
+<p>Are you sure you want to delete the section <strong><%= @section.course.name%></strong> with <strong><%= @section.instructor%></strong> at <strong><%= @section.time%></strong>?</p>
+
+<div>
+  <%= form_with url: section_path(@section), method: :delete do %>
+    <%= submit_tag 'Yes, Delete', class: "button" %>
+  <% end %>
+</div>
+
+<div>
+  <%= link_to 'Cancel', sections_path, class: "button" %>
+</div>

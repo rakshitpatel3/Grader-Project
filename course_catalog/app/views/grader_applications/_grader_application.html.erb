@@ -1,0 +1,23 @@
+<div id="<%= dom_id grader_application %>">
+  <p>
+    <strong>User Email:</strong>
+    <%= grader_application.user.email %>
+  </p>
+
+  <p>
+    <strong>Availability:</strong>
+    <%= grader_application.availability %>
+  </p>
+
+  <p>
+    <strong>Selected Course:</strong>
+    <% if grader_application.course_number.present? %>
+      <%= grader_application.course_number %> 
+      (<%= Course.find_by(number: grader_application.course_number)&.name || 'Unknown Course' %>)
+    <% else %>
+      No course selected
+    <% end %>
+  </p>
+
+  
+</div>

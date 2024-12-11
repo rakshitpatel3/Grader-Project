@@ -1,5 +1,14 @@
-<h1>Sections</h1>
-
+<h1>Course Sections</h1>
+<%= form_tag(sections_path, method: :get) do %>
+  <div class="search-bar">
+    <%= label_tag :search, "Search by Course Number or Instructor" %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", name: nil %>
+  </div>
+<% end %>
+<div class="button-container">
+<%= link_to 'Add New Section', new_section_path, class: "button" %>
+</div>
 <table>
   <thead>
     <tr>
@@ -7,6 +16,11 @@
       <th>Course Name</th>
       <th>Instructor</th>
       <th>Meeting Time</th>
+      <% if current_user&.admin? %>
+        <th>Graders Required</th>
+        <th>Graders Assigned</th>
+        <th>Graders Needed</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +30,19 @@
         <td><%= section.course.name %></td>
         <td><%= section.instructor %></td>
         <td><%= section.time %></td>
+        <% if current_user&.admin? %>
+          <td><%= section.graders_required %></td>
+          <td><%= section.graders_assigned %></td>
+          <td><%= section.graders_needed %></td>
+        <% end %>
+        <td>
+          <% if current_user&.admin? %>
+          <div class="button-container">
+            <%= link_to 'Edit', edit_section_path(section), class: "button" %>
+            <%= link_to 'Delete', confirm_destroy_section_path(section), class: "button" %>
+          </div>
+          <% end %>
+       </td>
       </tr>
     <% end %>
   </tbody>

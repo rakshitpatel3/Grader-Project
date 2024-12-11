@@ -6,7 +6,7 @@
 
  <div class="field email-container">
    <%= f.label :email %><br />
-   <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "yourname@osu.edu", class: "email-input" %>
+   <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'yourname.#@osu.edu', class: "email-input" %>
  </div>
 
  <div class="field">
@@ -15,18 +15,26 @@
  </div>
 
 
- <div class="field">
-   <%= f.label :password %>
-   <% if @minimum_password_length %>
-   <% end %><br />
-   <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password (6 characters minimum)" %>
- </div>
-
- <div class="field">
-   <%= f.label :password_confirmation %><br />
-   <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password confirmation" %>
+ <div class="field password-container">
+  <%= f.label :password %>
+  <% if @minimum_password_length %>
+  <% end %><br />
+  <div class="password-wrapper" style="position: relative;">
+    <%= f.password_field :password, id: "password", autocomplete: "new-password", class: "password-input", placeholder: "Password (6 characters minimum)" %>
+    <span class="show-password" onclick="togglePassword()">Show</span>
   </div>
-  <div class="field">
+</div>
+
+<div class="field password-container">
+  <%= f.label :password_confirmation %><br />
+  <div class="password-wrapper">
+    <%= f.password_field :password_confirmation, id: "password_confirmation", autocomplete: "new-password", class: "password-confirmation-input", placeholder: "Confirm Password" %>
+    <span class="show-password-confirmation" onclick="togglePasswordConfirmation()">Show</span>
+  </div>
+</div>
+
+
+<div class="field">
    <%= f.label :role %><br />
    <%= f.select :role, options_for_select([['Student', 'Student'], ['Instructor', 'Instructor'], ['Admin', 'Admin']]), { include_blank: 'Select a role' }, { required: true } %>
  </div>

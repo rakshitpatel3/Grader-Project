@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_05_060903) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_23_215222) do
   create_table "courses", force: :cascade do |t|
     t.string "number"
     t.string "name"
@@ -22,6 +22,32 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_05_060903) do
     t.text "description"
   end
 
+  create_table "grader_applications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "availability"
+    t.text "course_ids"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "course_number"
+    t.integer "section_id"
+    t.index ["user_id"], name: "index_grader_applications_on_user_id"
+  end
+
+  create_table "recommendations", force: :cascade do |t|
+    t.integer "instructor_id", null: false
+    t.integer "student_id", null: false
+    t.integer "course_id", null: false
+    t.string "recommendation_type"
+    t.text "comments"
+    t.integer "section_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_recommendations_on_course_id"
+    t.index ["instructor_id"], name: "index_recommendations_on_instructor_id"
+    t.index ["section_id"], name: "index_recommendations_on_section_id"
+    t.index ["student_id"], name: "index_recommendations_on_student_id"
+  end
+
   create_table "sections", force: :cascade do |t|
     t.integer "course_id", null: false
     t.string "instructor"
@@ -29,6 +55,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_05_060903) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "section_identifier"
+    t.integer "graders_required", default: 1
     t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
@@ -47,5 +74,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_05_060903) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "grader_applications", "users"
+  add_foreign_key "recommendations", "courses"
+  add_foreign_key "recommendations", "sections"
+  add_foreign_key "recommendations", "users", column: "instructor_id"
+  add_foreign_key "recommendations", "users", column: "student_id"
   add_foreign_key "sections", "courses"
 end

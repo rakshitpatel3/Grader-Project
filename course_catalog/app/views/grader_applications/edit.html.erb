@@ -1,0 +1,13 @@
+<% content_for :title, "Editing grader application" %>
+
+<h1>Editing grader application</h1>
+
+<%= render "form", grader_application: @grader_application %>
+
+<br>
+
+<div>
+  <%= link_to "Show this grader application", @grader_application %> |
+  <%= link_to "Back to grader applications", grader_applications_path %>
+   <%= link_to "Back to dashboard", home_path %>
+</div>

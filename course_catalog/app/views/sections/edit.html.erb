@@ -1,0 +1,32 @@
+<h1>Edit Section</h1>
+
+<%= form_with(model: @section, local: true) do |form| %>
+
+  <div>
+    <%= form.label :course_id, "Course" %>
+    <%= form.collection_select :course_id, Course.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.label :instructor, "Instructor" %>
+    <%= form.text_field :instructor %>
+  </div>
+
+  <div>
+    <%= form.label :time, "Meeting Time" %>
+    <%= form.text_field :time %>
+  </div>
+
+  <div>
+  <%= form.label :graders_required, "Graders Required" %>
+  <%= form.number_field :graders_required, min: 0 %>
+</div>
+
+
+  <div>
+    <%= form.submit "Update Section", class: "button" %>
+  </div>
+  
+<% end %>
+
+<%= link_to "Back to Sections", sections_path, class: "button" %>

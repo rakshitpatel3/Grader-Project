@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Grader applications" %>
+
+<h1>Grader Applications</h1>
+
+<div id="grader_applications">
+  <% @grader_applications.each do |grader_application| %>
+    <%= render grader_application %>
+    <p style="margin-top: 30px; margin-bottom: 100px;">
+        <%= link_to "Show this grader application", grader_application, class: "button" %>
+      </p>
+  <% end %>
+</div>
+
+<%= link_to "New grader application", new_grader_application_path, class: "button" %>
+ <%= link_to "Back to dashboard", home_path, class: "button" %>

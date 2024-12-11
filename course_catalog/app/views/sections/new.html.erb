@@ -1,0 +1,35 @@
+<h1>Add New Section</h1>
+
+<%= form_with model: @section, local: true do |form| %>
+  <div>
+    <%= form.label :name, "Section Name" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :schedule_time, "Meeting Time" %>
+    <%= form.text_field :time, placeholder: "e.g., Tue/Thu 6:30-7:50 pm", required: true %>
+  </div>
+
+  <div>
+    <%= form.label :course_id, "Course" %>
+    <%= form.collection_select :course_id, @courses, :id, :name, prompt: "Select a Course", required: true %>
+  </div>
+
+  <div>
+    <%= form.label :instructor, "Instructor" %>
+    <%= form.text_field :instructor, placeholder: "Instructor's Name", required: true %>
+  </div>
+
+ <div>
+    <%= form.label :instructor, "Graders Required" %>
+    <%= form.text_field :graders_required, placeholder: "e.g., 5", required: true %>
+  </div>
+  
+  <div>
+    <%= form.submit "Add Section", class: "button" %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Back to Sections', sections_path, class: "button button-secondary" %>

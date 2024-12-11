@@ -1,0 +1,40 @@
+<div class="recommendation-details">
+  <h1>Recommendation Details</h1>
+
+  <p>
+    <strong>Instructor:</strong>
+    <%= @recommendation.instructor.name %> (<%= @recommendation.instructor.email %>)
+  </p>
+
+  <p>
+    <strong>Student:</strong>
+    <%= @recommendation.student.name %> (<%= @recommendation.student.email %>)
+  </p>
+
+  <p>
+    <strong>Course:</strong>
+    <%= @recommendation.course.number %> - <%= @recommendation.course.name %>
+  </p>
+
+  <p>
+    <strong>Type:</strong>
+    <%= @recommendation.recommendation_type.humanize %>
+  </p>
+
+  <% if @recommendation.section %>
+    <p>
+      <strong>Section:</strong>
+      <%= @recommendation.section.instructor %> (<%= @recommendation.section.time %>)
+    </p>
+  <% end %>
+
+  <p>
+    <strong>Comments:</strong>
+    <%= @recommendation.comments %>
+  </p>
+
+  <div class="actions">
+    <%= link_to 'Back', recommendations_path, class: 'button' %>
+    <%= link_to 'Back to Dashboard', home_path, class: 'button' %>
+  </div>
+</div>

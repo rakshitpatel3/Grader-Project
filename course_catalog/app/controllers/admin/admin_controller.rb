@@ -5,7 +5,7 @@ module Admin
     before_action :authenticate_user!
     before_action :require_admin
 
-     def index
+    def index
       @courses = Course.all
   
       # Search functionality: filter by course number or title

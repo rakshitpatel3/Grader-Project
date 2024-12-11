@@ -72,6 +72,95 @@ button:hover, .button:hover {
 }
 
 table {
-  border-collapse: separate;
-  border-spacing: 0 30px; 
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+thead th {
+  background-color: #c0392b;
+  color: white;
+  text-align: left;
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+tbody td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+.pagy.nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 8px;
+  font-family: Arial;
+  font-size: 14px;
+}
+
+.pagy.nav a {
+  color: #202020;
+  border: 1px solid #ded8d8;
+  padding: 8px 12px;
+  text-decoration: none;
+}
+
+.pagy.nav a:hover {
+  background-color: #0096FF;
+  color: white;
+}
+
+.pagy.nav .current {
+  background-color: #0096FF;
+  color: white;
+}
+
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input {
+  width: 100%;
+  padding-right: 60px; 
+}
+
+.show-password {
+  position: absolute;
+  right: 10px; 
+  color: blue;
+  font-size: 14px; 
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.show-password:hover {
+  color: darkblue;
+}
+
+.show-password-confirmation {
+  position: absolute;
+  right: 10px; 
+  color: blue;
+  font-size: 14px; 
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.show-password-comfirmation:hover {
+  color: darkblue;
 }

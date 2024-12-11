@@ -1,0 +1,49 @@
+<h1>Recommendations</h1>
+
+<% if @recommendations.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Student</th>
+        <th>Course</th>
+        <th>Type</th>
+        <th>Section</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recommendations.each do |recommendation| %>
+        <tr>
+          <td><%= recommendation.student.email %></td>
+          <td><%= recommendation.course.number %></td>
+          <td><%= recommendation.recommendation_type.humanize %></td>
+          <td>
+            <% if recommendation.section %>
+              <%= recommendation.section.instructor %> (<%= recommendation.section.time %>)
+            <% else %>
+              N/A
+            <% end %>
+          </td>
+          <td>
+            <%= link_to 'View', recommendation_path(recommendation), class: 'button' %>
+            <% if current_user.admin? || current_user == recommendation.instructor %>
+              <%= link_to 'Edit', edit_recommendation_path(recommendation), class: 'button' %>
+              <%= button_to 'Delete', recommendation_path(recommendation), 
+                  method: :delete, 
+                  data: { confirm: 'Are you sure?' }, 
+                  class: 'button' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No recommendations found.</p>
+<% end %>
+
+<% if current_user.instructor? %>
+  <%= link_to 'New Recommendation', new_recommendation_path, class: 'button' %>
+<% end %>
+
+<%= link_to 'Back to Dashboard', home_path, class: 'button' %>

@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+<p><strong>User Email:</strong> <%= @grader_application.user.email %></p>
+<p><strong>Availability:</strong> <%= @grader_application.availability %></p>
+
+<p><strong>Course Number:</strong> 
+  <% if @grader_application.course_number.present? %>
+    <%= @grader_application.course_number %> 
+    (<%= Course.find_by(number: @grader_application.course_number)&.name || 'Unknown Course' %>)
+  <% else %>
+    No course selected
+  <% end %>
+</p>
+
+<div style="display: flex; justify-content: flex-start; gap: 10px; margin-top: 20px;">
+  <%= link_to "Edit this grader application", edit_grader_application_path(@grader_application), class: "button" %>
+  <%= link_to "Back to grader applications", grader_applications_path, class: "button" %>
+  <%= link_to "Back to dashboard", home_path, class: "button" %>
+  <%= button_to "Destroy this grader application", @grader_application, method: :delete, class: "button" %>
+</div>

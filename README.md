@@ -30,7 +30,7 @@ To install the CSE Grader Assignment System:
      ```
 
 2. **Extract Files:**
-   - Download the zip file at this link: https://github.com/cse-3901-sharkey/2024-au-Team-2-Lab-2.git
+   - Download the zip file at this link: https://github.com/cse-3901-sharkey/2024-au-Team-2-Lab-3.git
      Extract the files contained in the zip
 
 3. **Open Folder in IDE:**
@@ -68,9 +68,25 @@ To install the CSE Grader Assignment System:
 ---
 
 ## Role-Specific Features
-- **Students:** Students can log in and view the list of available courses and sections from the CSE department.
-- **Instructors:** Instructors can log in and view the list of available courses and sections from the CSE department.
-- **Admin:** Admin can log in and view, edit (add, delete, change), and reload the course catalog; Admin can approve Instructor or Admin role requests
+- **Students:**
+
+  - log in and view the list of available courses and sections from the CSE department
+  - fill out a form to be considered for a grading position
+  - update their application for a grading position after submission
+    
+- **Instructors:**
+  
+  - log in and view the list of available courses and sections from the CSE department
+  - fill out a form to recommend students to be hired for a course or a particular section
+     - students who are not logged in, will log in with the OSU email that was recommended with the default password: ```password``` (which can be changed after logging in) 
+    
+- **Admin:**
+  
+   - log in and view, edit (add, delete, change) courses and sections
+   - reload the course catalog
+   - approve Instructor or Admin role requests
+   - view and edit the number of graders required or assigned
+  
 
 ---
 

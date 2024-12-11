@@ -13,6 +13,14 @@
       <%= link_to 'Edit Profile', edit_user_registration_path, class: "button" %>
       <%= link_to 'View Courses', courses_path, class: "button" %>
       <%= link_to 'View Sections', sections_path, class: "button" %>
+
+      <% if current_user.student? && current_user.approved? %>
+      <%= link_to 'Grader Application', grader_applications_path, class: "button" %>
+      <% end %>
+
+      <% if current_user.instructor? %>
+  <%= link_to 'Create Recommendation', new_recommendation_path, class: "button" %>
+<% end %>
     </nav>
 
     <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: "button" %>
